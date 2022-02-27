@@ -11,9 +11,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 //swagger
-const swaggerOption = require("./app/config/swagger.config");
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+const swaggerDoc = require("./app/config/swagger.config");
+const swaggerUI = require("swagger-ui-express");
 
 //routes
 const userRoutes = require("./app/routes/user.routes");
@@ -71,11 +70,8 @@ app.use(cookieParser());
 //public folder
 app.use("/public", express.static(path.join(__dirname, "./app/public")));
 
-//swagger-jsdoc init
-const openApiSpecification = swaggerJsdoc(swaggerOption);
-
 //swagger-ui init
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiSpecification));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 //Routes
 app.use("/api/user", userRoutes);

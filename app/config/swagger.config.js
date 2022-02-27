@@ -1,9 +1,10 @@
-const swaggerJSDoc = require("swagger-jsdoc");
+const schemas = require("../../docs/schema/index");
+const paths = require("../../docs/path/index");
 
-const swaggerDefinition = {
+module.exports = {
   openapi: "3.0.0",
   info: {
-    title: "SE Backend",
+    title: "Backend",
     description: "All Apis for integration",
     version: "0.0.1",
   },
@@ -42,7 +43,14 @@ const swaggerDefinition = {
       //   in: "header",
       // },
     },
+    schemas: {
+      ...schemas,
+    },
   },
+  paths: {
+    ...paths,
+  },
+  apis: ["./app/routes/*.js"],
   //  if security required globally
   // security: [
   //   {
@@ -51,10 +59,3 @@ const swaggerDefinition = {
   // ],
 };
 
-const options = {
-  swaggerDefinition,
-  // Paths to files(relative to root directory) containing OpenAPI definitions
-  apis: ["./app/routes/*.js"],
-};
-
-module.exports = options;
